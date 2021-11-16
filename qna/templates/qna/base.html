@@ -29,7 +29,7 @@
         {% block content %}
 
             {% if user.is_authenticated %}
-                Welcome {{user.first_name}} {{user.last_name}}
+                Welcome {{user.first_name}} {{user.last_name}} <a href="mailto:{{user.email}}">{{user.email}}</a>
             {% else %}
                 Please login...
             {% endif %}
