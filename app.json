@@ -1,0 +1,22 @@
+{
+  "name": "fsuu-qna",
+  "description": "qna",
+  "image": "heroku/python",
+  "repository": "https://github.com/rald/qna",
+  "keywords": ["python", "django" ],
+  "addons": [ ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python manage.py collectstatic --noinput",
+        "test": "python manage.py test"
+      }
+    }
+  }
+}
