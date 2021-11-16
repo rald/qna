@@ -30,7 +30,7 @@ def login_request(request):
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
-				messages.info(request,f"You are now logged in as {username}.")
+				messages.info(request, f"You are now logged in as {username}.")
 				return redirect("qna:homepage")
 			else:
 				messages.error(request,"Invalid username or password.")
@@ -41,5 +41,5 @@ def login_request(request):
 
 def logout_request(request):
 	logout(request)
-	messages.info(request, "You have successfully logged out.") 
+	messages.info(request, "You have successfully logged out.")
 	return redirect("qna:homepage")
