@@ -4,10 +4,10 @@
   "image": "heroku/python",
   "repository": "https://github.com/rald/qna",
   "keywords": ["python", "django" ],
-  "addons": [ ],
+  "addons": [],
   "env": {
     "SECRET_KEY": {
-      "description": "",
+      "description": "It's Alive!",
       "generator": "secret"
     }
   },
