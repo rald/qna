@@ -29,7 +29,7 @@
         {% block content %}
 
             {% if user.is_authenticated %}
-                Welcome {{user.firstname}} {{user.lastname}}
+                Welcome {{user.first_name}} {{user.last_name}}
             {% else %}
                 Please login...
             {% endif %}
