@@ -4,6 +4,9 @@
 
 {% block content %}
     {% if user.is_authenticated %}
+
+        <center><b>Subjects</b></center>
+
         {% if subject_list %}
             <ol>
             {% for subject in subject_list %}
