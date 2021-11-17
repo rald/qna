@@ -22,7 +22,7 @@
                             {% if choice.question.id == question.id %}
                                 <p>
                                   <label>
-                                    <input id="q{{ question.id }}c{{ choice.id }}" name="q{{ question.id }}" type="radio" />
+                                    <input id="q{{ question.id }}c{{ choice.id }}" name="q{{ question.id }}" type="radio" value="{{ choice.id }}" />
                                     <span class="choice">{{ choice.choice_text }}</span>
                                   </label>
                                 </p>
