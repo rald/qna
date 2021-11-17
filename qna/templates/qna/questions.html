@@ -2,11 +2,12 @@
 
 {% block title %}Questions{% endblock %}
 
-{% block subject %}{{ subject.subject_text }}{% endblock %}
+{% if user.is_authenticated %}
 
-{% block content %}
+{% block subject %} - {{ subject.subject_text }}{% endblock %}
 
-    {% if user.is_authenticated %}
+    {% block content %}
+
 
         {% if question_list %}
 
@@ -41,11 +42,12 @@
             </form>
             
         {% else %}
+
             <p>No questions are available.</p>
+
         {% endif %}
 
+    {% endblock %}
 
-    {% endif %}
-{% endblock %}
-
+{% endif %}
 
