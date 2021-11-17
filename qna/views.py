@@ -33,7 +33,7 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request,f"You are now logged in as {username}.")
-				return redirect("qna:homepage")
+				return redirect("qna:subjects")
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
@@ -45,18 +45,23 @@ def login_request(request):
 
 def logout_request(request):
 	logout(request)
-	messages.info(request, "You have successfully logged out.") 
+	messages.info(request, "You have successfully logged out.")
 	return redirect("qna:homepage")
 
 
 
 def homepage(request):
+    return render (request=request,template_name="qna/homepage.html")
+
+
+
+def subjects(request):
     subject_list = Subject.objects.all()
-    return render (request=request,template_name="qna/homepage.html",context={"subject_list":subject_list})
+    return render (request=request,template_name="qna/subjects.html",context={"subject_list":subject_list})
 
 
 
-def subject(request,subject_id):
+def questions(request,subject_id):
     subject = Subject.objects.get(id=subject_id)
     question_list = Question.objects.filter(subject__id=subject_id)
     choice = Choice.objects.all()
@@ -65,5 +70,5 @@ def subject(request,subject_id):
         "question_list": question_list,
         "choice_list": choice,
     }
-    return render (request=request,template_name="qna/subject.html",context=context)
+    return render (request=request,template_name="qna/questions.html",context=context)
 

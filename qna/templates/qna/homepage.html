@@ -2,19 +2,8 @@
 
 {% block title %}Home{% endblock %}
 
+{% block subject %} - please login...{% endblock %}
+
 {% block content %}
-    {% if user.is_authenticated %}
-
-        <center><b>Subjects</b></center>
-
-        {% if subject_list %}
-            <ol>
-            {% for subject in subject_list %}
-                <li><a href="{{ subject.id }}">{{ subject.subject_text }}</a></li>
-            {% endfor %}
-            </ol>
-        {% else %}
-            <p>No subjects are available.</p>
-        {% endif %}
-    {% endif %}
 {% endblock %}
+

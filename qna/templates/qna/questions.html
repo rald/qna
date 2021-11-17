@@ -1,12 +1,12 @@
 {% extends 'qna/base.html'  %}
 
-{% block title %}Subject{% endblock %}
+{% block title %}Questions{% endblock %}
+
+{% block subject %}{{ subject.subject_text }}{% endblock %}
 
 {% block content %}
 
     {% if user.is_authenticated %}
-
-        <center><b>{{ subject.subject_text }}</b></center>
 
         {% if question_list %}
 
