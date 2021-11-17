@@ -43,3 +43,6 @@ class Score(models.Model):
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     score =  models.PositiveIntegerField(default=0)
+
+
+
