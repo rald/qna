@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    {% if user.is_authenticated %}
+
         {% if subject_list %}
             <ol>
             {% for subject in subject_list %}
@@ -15,6 +17,8 @@
         {% else %}
             <p>No subjects are available.</p>
         {% endif %}
+
+    {% endif %}
 
 {% endblock %}
 
