@@ -2,8 +2,16 @@
 
 {% block title %}Home{% endblock %}
 
-{% block subject %} - please login...{% endblock %}
+{% if user.is_authenticated %}
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 
+{% else %}
+
+    {% block subject %} - please login...{% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+{% endif %}
