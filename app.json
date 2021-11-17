@@ -1,8 +1,8 @@
 {
-  "name": "fsuu-qna",
+  "name": "qna",
   "description": "qna",
   "image": "heroku/python",
-  "repository": "https://github.com/rald/qna",
+  "repository": "",
   "keywords": ["python", "django" ],
   "addons": [],
   "env": {
