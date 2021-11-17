@@ -1,1 +1,17 @@
 {% extends 'qna/base.html'  %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if subject_list %}
+            <ul>
+            {% for subject in subject_list %}
+                <li><a href="{{ subject.id }}">{{ subject.subject_text }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No subjects are available.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

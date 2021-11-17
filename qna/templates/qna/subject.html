@@ -1,0 +1,51 @@
+{% extends 'qna/base.html'  %}
+
+{% block title %}Subject{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        <center><b>{{ subject.subject_text }}</b></center>
+
+        {% if question_list %}
+
+            <form>
+
+            <ol>
+                {% for question in question_list %}
+                    <li>
+                    
+                        {{ question.question_text }}
+
+                        {% for choice in choice_list %}
+                            {% if choice.question.id == question.id %}
+                                <p>
+                                  <label>
+                                    <input name="group{{ question.id }}" type="radio" />
+                                    <span class="choice">{{ choice.choice_text }}</span>
+                                  </label>
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                
+                    </li>
+
+                    <br/><br/>
+
+                {% endfor %}
+            </ol>
+
+            <center><input type="submit" value="Submit"></center>
+
+            </form>
+            
+        {% else %}
+            <p>No questions are available.</p>
+        {% endif %}
+
+
+    {% endif %}
+{% endblock %}
+
+
