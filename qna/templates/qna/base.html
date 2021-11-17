@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>QNA - {% block title %}Home{% endblock %}</title>
+        <title>Jinki's Q&A - {% block title %}Home{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'materialize/css/materialize.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -11,7 +11,7 @@
 
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">FSUU</a>
+                <a href="#" class="brand-logo">Jinki's Q&A</a>
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
                         <li><a href="/logout">Logout {{user.username}}</a></li>
