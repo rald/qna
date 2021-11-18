@@ -37,8 +37,10 @@ class Score(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     score =  models.PositiveIntegerField(default=0)
+    items =  models.PositiveIntegerField(default=0)
+    pub_date = models.DateTimeField(default=timezone.now())
 
     def __str__(self):
-        return str(self.score)
+        return f"{self.score} out of {self.items}"
 
 

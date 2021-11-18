@@ -8,47 +8,61 @@
 
     {% if user.is_authenticated %}
 
-        <h1 align="center">{{ subject.subject_text }}</h1>
+        {% if type == "quiz" %}
 
-        {% if question_list %}
+            <h1 align="center">{{ subject.subject_text }}</h1>
 
-            <form>
+            {% if question_list %}
 
-                <ol>
-                    {% for question in question_list %}
-                        <li>
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <ol>
+                        {% for question in question_list %}
+                            <li>
+
+                                {{ question.question_text }}
+
+                                {% for choice in choice_list %}
+                                
+                                    {% if choice.question.id == question.id %}
+                                        <p>
+                                          <label>
+                                            <input name="group{{ question.id }}" type="radio" value="{{ question.id }},{{ choice.id }}" />
+                                            <span>{{ choice.choice_text }}</span>
+                                          </label>
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
                         
-                            {{ question.question_text }}
+                            </li>
 
-                            {% for choice in choice_list %}
-                                {% if choice.question.id == question.id %}
-                                    <p>
-                                      <label>
-                                        <input id="q{{ question.id }}c{{ choice.id }}" name="q{{ question.id }}" type="radio" value="{{ choice.id }}" />
-                                        <span class="choice">{{ choice.choice_text }}</span>
-                                      </label>
-                                    </p>
-                                {% endif %}
-                            {% endfor %}
+                            <br/><br/>
+
+                        {% endfor %}
+                    </ol>
+
+                    <center><input type="submit" value="Submit"></center>
+
+                    </form>
                     
-                        </li>
+            {% else %}
 
-                        <br/><br/>
+                <center><p>No questions are available.</p></center>
 
-                    {% endfor %}
-                </ol>
+            {% endif %}
 
-                <center><input type="submit" value="Submit"></center>
 
-                </form>
-                
         {% else %}
 
-            <center><p>No questions are available.</p></center>
+            <center><p>Your score is {{ score }} out of {{ items }} --- {{ percent }}.</p></center>
 
         {% endif %}
 
     {% endif %}
+
+    <br/><br/>
 
 {% endblock %}
 

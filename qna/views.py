@@ -3,9 +3,12 @@ from django.contrib import messages
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 
 from .forms import NewUserForm,UpdateUserForm
 from .models import Choice, Question, Subject, Score
+
+
 
 def register_request(request):
 	if request.method == "POST":
@@ -28,7 +31,6 @@ def login_request(request):
 			username = form.cleaned_data.get('username')
 			password = form.cleaned_data.get('password')
 			user = authenticate(username=username, password=password)
-			me = user
 			if user is not None:
 				login(request, user)
 				messages.info(request,f"You are now logged in as {username}.")
@@ -55,8 +57,21 @@ def homepage(request):
 
 
 def subjects(request):
-    subject_list = Subject.objects.all()
-    return render (request=request,template_name="qna/subjects.html",context={"subject_list":subject_list})
+
+    sbjscr=[]
+    for sbj in Subject.objects.all():
+        quiz=Score.objects.filter(user__id=request.user.id,subject__id=sbj.id).order_by('-pub_date');
+        if len(quiz)>0:
+            sbjscr.append({"topic":sbj,"quiz":quiz[0],"percent":"{:.2f}%".format(float(quiz[0].score)/float(quiz[0].items)*100)})
+        else:
+            sbjscr.append({"topic":sbj,"quiz":None})
+
+
+    context = {
+        "subject_list":sbjscr,
+    }
+
+    return render (request=request,template_name="qna/subjects.html",context=context)
 
 
 
@@ -82,12 +97,40 @@ def update_user_request(request):
 
 
 def questions(request,subject_id):
-    subject = Subject.objects.get(id=subject_id)
-    question_list = Question.objects.filter(subject__id=subject_id)
-    choice = Choice.objects.all()
-    context = {
-        "subject": subject,
-        "question_list": question_list,
-        "choice_list": choice,
-    }
+    if request.method == "POST":
+        data=request.POST
+
+        score=0;
+        items=0;
+        for key in data.keys():
+            if str(key).startswith("group"):
+                items+=1
+                x=data[key].split(',')
+                c=Choice.objects.get(id=x[1])
+                if c.is_correct_answer:
+                    score+=1
+
+        usr=User.objects.get(pk=request.user.id)
+        sbj=Subject.objects.get(pk=subject_id)
+        scr=Score(user=usr,subject=sbj,score=score,items=items)
+        scr.save()
+
+        context={
+            "type": "result",
+            "score": score,
+            "items": items,
+            "percent": "{:.2f}%".format(float(score)/float(items)*100.0),
+        }
+
+    else:
+        subject = Subject.objects.get(id=subject_id)
+        question_list = Question.objects.filter(subject__id=subject_id)
+        choice = Choice.objects.all()
+        context = {
+            "type": "quiz",
+            "subject": subject,
+            "question_list": question_list,
+            "choice_list": choice,
+        }
     return render (request=request,template_name="qna/questions.html",context=context)
+

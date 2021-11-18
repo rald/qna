@@ -13,7 +13,7 @@
         {% if subject_list %}
             <ol>
             {% for subject in subject_list %}
-                <li><a href="/questions/{{ subject.id }}">{{ subject.subject_text }}</a></li>
+                <li><a href="/questions/{{ subject.topic.id }}">{{ subject.topic.subject_text }}</a>{% if subject.quiz %} --- {{ subject.quiz.score }}/{{ subject.quiz.items }} --- {{ subject.percent }}{% endif %}</li>
             {% endfor %}
             </ol>
         {% else %}

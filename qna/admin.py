@@ -28,15 +28,23 @@ class SubjectAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Question',               {'fields': ['question_text']}),
         ('Subject',                {'fields': ['subject']}),
+        ('Question',               {'fields': ['question_text']}),
     ]
-    readonly_fields = ['subject']
     inlines = [ChoiceInline]
     list_display = ('question_text','subject')
     search_fields = ('question_text',)
 
 
 
+class ScoreAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Score',                  {'fields': ['user','subject','score','items','pub_date']}),
+    ]
+    list_display = ('user','subject','score','items','pub_date')
+    search_fields = ('user','subject','create_at','modified_at')
+
 admin.site.register(Subject,  SubjectAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Score,    ScoreAdmin)
+
