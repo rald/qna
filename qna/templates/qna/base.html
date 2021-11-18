@@ -13,9 +13,11 @@
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo left">Jinki's Q&A {% block subject %}{% endblock %}</a>
                 <ul id="nav-mobile" class="right">
+                        <li><a href="/">Home</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="/subjects">Subjects</a></li>
-                        <li><a href="/logout">Logout {{user.username}}</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                        <li><a href="/update_user">{{ user.username|title }}</a></li>
                     {% else %}
                         <li><a href="/register">Register</a></li>
                         <li><a href="/login">Login</a></li>

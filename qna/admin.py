@@ -1,19 +1,11 @@
 from django.contrib import admin
 
-from .models import Choice, Question, Subject, Score, Student
-
-
+from .models import Choice, Question, Subject, Score
 
 
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
-    extra = 1
-
-
-
-class QuestionInline(admin.TabularInline):
-    model = Question
     extra = 1
 
 
@@ -26,29 +18,18 @@ class ScoreInline(admin.TabularInline):
 
 
 
-class StudentAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Student',                {'fields': ['first_name','last_name','email','address']}),
-    ]
-    inlines = [ScoreInline]
-    list_display = ('first_name','last_name','email','address')
-    search_fields = ('first_name','last_name','email','address')
-
-
-
 class SubjectAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Subject',                {'fields': ['subject_text']}),
     ]
-    inlines = (QuestionInline,)
     search_fields = ('subject_text',)
 
 
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Subject',                {'fields': ['subject']}),
         ('Question',               {'fields': ['question_text']}),
+        ('Subject',                {'fields': ['subject']}),
     ]
     readonly_fields = ['subject']
     inlines = [ChoiceInline]
@@ -57,6 +38,5 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject,  SubjectAdmin)
 admin.site.register(Question, QuestionAdmin)

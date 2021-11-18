@@ -1,0 +1,27 @@
+{% extends "qna/base.html" %}
+
+{% load crispy_forms_tags %}         
+
+{% block title %}Update User{% endblock %}
+
+{% block subject %} - Update User{% endblock %}
+
+{% block content %} 
+
+    {% if user.is_authenticated %}
+
+        <!--Update Account--> 
+        <div class="container py-5">
+        	<h1 align="center">Update User</h1>
+        	<form method="POST">
+        		{% csrf_token %}
+        		{{ update_user_form|crispy }}                    
+        		<button class="btn btn-primary" type="submit">Update</button>
+        	</form>
+        </div>
+
+        <br/><br/>
+
+    {% endif %}
+
+{% endblock %}

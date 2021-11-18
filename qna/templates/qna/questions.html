@@ -8,6 +8,8 @@
 
     {% if user.is_authenticated %}
 
+        <h1 align="center">{{ subject.subject_text }}</h1>
+
         {% if question_list %}
 
             <form>
@@ -42,7 +44,7 @@
                 
         {% else %}
 
-            <p>No questions are available.</p>
+            <center><p>No questions are available.</p></center>
 
         {% endif %}
 

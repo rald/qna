@@ -1,4 +1,4 @@
-{% extends 'qna/base.html'  %}
+{% extends 'qna/base.html' %}
 
 {% block title %}Subjects{% endblock %}
 
@@ -8,10 +8,12 @@
 
     {% if user.is_authenticated %}
 
+        <h1 align="center">Subjects</h1>
+
         {% if subject_list %}
             <ol>
             {% for subject in subject_list %}
-                <li><a href="questions/{{ subject.id }}">{{ subject.subject_text }}</a></li>
+                <li><a href="/questions/{{ subject.id }}">{{ subject.subject_text }}</a></li>
             {% endfor %}
             </ol>
         {% else %}

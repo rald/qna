@@ -7,7 +7,7 @@
   "addons": [],
   "env": {
     "SECRET_KEY": {
-      "description": "It's Alive!",
+      "description": "It's alive!",
       "generator": "secret"
     }
   },
