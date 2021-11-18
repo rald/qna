@@ -61,7 +61,7 @@ def subjects(request):
     sbjscr=[]
     for sbj in Subject.objects.all():
         quiz=Score.objects.filter(user__id=request.user.id,subject__id=sbj.id).order_by('-pub_date');
-        if len(quiz)>0:
+        if quiz and len(quiz)>0:
             sbjscr.append({"topic":sbj,"quiz":quiz[0],"percent":"{:.2f}%".format(float(quiz[0].score)/float(quiz[0].items)*100)})
         else:
             sbjscr.append({"topic":sbj,"quiz":None})
