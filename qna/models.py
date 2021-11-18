@@ -43,4 +43,3 @@ class Score(models.Model):
     def __str__(self):
         return f"{self.score} out of {self.items}"
 
-
