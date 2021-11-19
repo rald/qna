@@ -39,12 +39,11 @@ class QuestionAdmin(admin.ModelAdmin):
 
 class ChoiceAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Subject',                 {'fields': ['subject']}),
         ('Question',                {'fields': ['question']}),
         ('Choice',                  {'fields': ['choice_text']}),
         ('Is Correct Answer',       {'fields': ['is_correct_answer']}),
     ]
-    list_display = ('subject','question','choice_text','is_correct_answer')
+    list_display = ('question','choice_text','is_correct_answer')
     search_fields = ('question_text',)
 
 
@@ -54,7 +53,7 @@ class ScoreAdmin(admin.ModelAdmin):
         ('Score',                  {'fields': ['user','subject','score','items','pub_date']}),
     ]
     list_display = ('user','subject','score','items','pub_date')
-    search_fields = ('user','subject','create_at','modified_at')
+    search_fields = ('user','subject','pub_date')
 
 
 
