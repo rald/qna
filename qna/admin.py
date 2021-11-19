@@ -13,7 +13,7 @@ class ChoiceInline(admin.TabularInline):
 class ScoreInline(admin.TabularInline):
     model = Score
     extra = 1
-    list_display = ('subject','score')
+    list_display = ('subject','score','items')
     readonly_fields = ('subject',)
 
 
